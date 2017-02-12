@@ -21,26 +21,26 @@ class GtpuMode(object):
     class Spec(TrafficSpec):
         def __init__(self, num_enb=1, flows_per_teid=5, num_teids=1,
                      payload_size=8, dut_decap=False, **kwargs):
-            self.num_enb = flows_per_teid
+            self.num_enb = num_enb
             self.flows_per_teid = flows_per_teid
             self.num_teids = num_teids
             self.payload_size = payload_size
             self.dut_decap = dut_decap
             super(GtpuMode.Spec, self).__init__(**kwargs)
 
-    def __str__(self):
-        s = super(GtpuMode.Spec, self).__str__() + '\n'
-        attrs = [
-            ('num_enb', lambda x: str(x)),
-            ('flows_per_teid', lambda x: str(x)),
-            ('num_teids', lambda x: str(x)),
-            ('payload_size', lambda x: str(x)),
-            ('dut_decap', lambda x: 'true' if x else 'false')
-        ]
-        return s + self._attrs_to_str(attrs, 25)
+        def __str__(self):
+            s = super(GtpuMode.Spec, self).__str__() + '\n'
+            attrs = [
+                ('num_enb', lambda x: str(x)),
+                ('flows_per_teid', lambda x: str(x)),
+                ('num_teids', lambda x: str(x)),
+                ('payload_size', lambda x: str(x)),
+                ('dut_decap', lambda x: 'true' if x else 'false')
+            ]
+            return s + self._attrs_to_str(attrs, 25)
 
-    def __repr__(self):
-        return self.__str__()
+        def __repr__(self):
+            return self.__str__()
 
     @staticmethod
     def setup_pipeline(cli, port, spec, qid):
