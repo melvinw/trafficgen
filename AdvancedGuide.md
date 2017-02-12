@@ -12,6 +12,7 @@ You can generate three types of traffic
 + `udp`: Simple stream(s) of UDP packets
 + `flowgen`: More realistic, flow-based traffic
 + `http`: Like `flowgen` but with HTTP payloads
++ `gtpu`: Like `udp` but with GPRS Tunneling packets
 
 ## Quick Start
 
@@ -136,3 +137,15 @@ Option | Description
 ------ | -----------
 `num_flows` | Setting `num_flows=N` will result in trafficgen sending `N` flows. By default `num_flows` is set to `4000`.
 `src_port` | Setting `src_port=X` will result in trafficgen generating HTTP traffic with TCP source ports starting with `X`. By default `src_port` is set to `1001`.
+
+### GTP-U Options
+
+The following options are only applicable to ports sending in `gtpu` mode.
+
+Option | Description
+------ | -----------
+`num_enb` | Setting `num_enb=N` will result in trafficgen sending GTP-U packets from `N` diffreent eNodeBs, i.e. it will generate packets from `N` source IP addresses in the outer IP header. By default `num_enb` is set to `1`.
+`flows_per_teid` | Setting `flows_per_teid=N` will result in trafficgen sending IP packets to `N` diffreent hosts, i.e. it will generate packets with `N` destination IP addresses in the inner IP header. By default `num_enb` is set to `5`.
+`num_teids` | Setting `num_teids=N` will result in trafficgen sending packets from `N` different GTP-U tunnel endpoint identifiers(teids). By default `num_teids` is set to `1`.
+`payload_size` | Setting `payload_size=N` will result in trafficgen sending GTP-U packets with `N`-byte payloads.
+`dut_decap` | Setting `dut_decap` indicates that the DUT will decapsulate any received GTP-U packets and send back the inner IP packet. This is important for getting sensible latency measurements.
