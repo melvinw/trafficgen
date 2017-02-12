@@ -42,3 +42,4 @@ def setup_mclasses(cli, globs):
 from udp import UdpMode
 from flowgen import FlowGenMode
 from http import HttpMode
+from gtpu import GtpuMode
